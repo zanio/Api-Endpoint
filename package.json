@@ -1,0 +1,48 @@
+{
+  "name": "resapi",
+  "version": "1.0.0",
+  "description": "A simple application for rest Api interaction with the front end",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon --exec babel-node app",
+    "test": "nyc --reporter=html --reporter=text mocha --require @babel/register --require @babel/polyfill test/*.js --exit",
+    "coverage": "nyc report --reporter=text-lcov | coveralls"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zanio/Api-Endpoint.git"
+  },
+  "keywords": [
+    "restApi",
+    "endpoints",
+    "databsaeless"
+  ],
+  "author": "Aniefiok Akpan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zanio/Api-Endpoint/issues"
+  },
+  "homepage": "https://github.com/zanio/Api-Endpoint#readme",
+  "dependencies": {
+    "bcrypt": "^3.0.6",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "dotenv": "^8.0.0",
+    "express": "^4.17.0",
+    "jsonwebtoken": "^8.5.1",
+    "mocha": "^6.1.4",
+    "nyc": "^14.1.1",
+    "babel-polyfill": "^6.26.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/node": "^7.4.5",
+    "@babel/polyfill": "^7.4.4",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/register": "^7.4.4",
+    "coveralls": "^3.0.3",
+    "mocha-lcov-reporter": "^1.3.0",
+    "morgan": "^1.9.1",
+    "nodemon": "^1.19.0"
+  }
+}

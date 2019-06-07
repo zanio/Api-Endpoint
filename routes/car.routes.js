@@ -11,7 +11,7 @@ let {car} = require('../data/users')
 router.post('/car', m.authorization, m.jwtVerify,m.getId, async(req, res)=>{
   const {carPost} = req
   cars.insertcar(carPost)
-  res.status(200).json(car)
+  res.status(200).json(carPost)
   console.log(car)
 })
 

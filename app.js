@@ -12,9 +12,11 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(routes)
 
-app.get('/', (req, res) => {
-    res.json({ message: 'Hello world' })
-})
+app.use('*', (req, res) => {
+    res.status(404).json({status:404,err:'That routes is not a known route'});
+  });
+
+
 // Starting server
 const PORT = process.env.PORT || 3300
 app.listen(PORT, ()=>{

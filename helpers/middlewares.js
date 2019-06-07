@@ -1,3 +1,4 @@
+import { newDate } from './helper'
 const mustBeInteger = (req, res, next) => {
 
     const id = req.params.id
@@ -100,8 +101,8 @@ const authorization = (req, res, next)=>{
         next();
     } else {
         //If header is undefined return Forbidden (403)
-        res.status(403).json({
-            err:403,
+        res.status(401).json({
+            err:401,
             data:'This is a protected routes, you have to be logged in'
         })
     }
@@ -194,10 +195,11 @@ const isSignUp = (req, res, next) => {
 const getId = (req, res, next)=>{
     const {result} = req;
     let {user} = require('../data/users.js');
-    const id = {id:result.user.id};
+    const id = {id:result.payload};
+    const date = { createdAt: newDate()} 
     //user = user.find(r=>r.id === result.user.id);
     const {email, model,manufacturer} = req.body
-    const data = {...id, email, model,manufacturer,}
+    const data = {...id, email, model,manufacturer,...date}
     const carPost = {status:200,data}
     if(id){
         req.carPost= carPost;

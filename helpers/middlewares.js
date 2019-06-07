@@ -191,9 +191,29 @@ const isSignUp = (req, res, next) => {
     
 }
 
+const getId = (req, res, next)=>{
+    const {result} = req;
+    let {user} = require('../data/users.js');
+    const id = {id:result.user.id};
+    //user = user.find(r=>r.id === result.user.id);
+    const {email, model,manufacturer} = req.body
+    const data = {...id, email, model,manufacturer,}
+    const carPost = {status:200,data}
+    if(id){
+        req.carPost= carPost;
+        next();
+    } else{
+        res.status(401).json({
+            status:401,
+            error:'unauthorized posting'
+        })
+    }
+}
+
 
 export {
     mustBeInteger,
+    getId,
     checkFieldsPost,
     emailValidation,
     isSignUp,

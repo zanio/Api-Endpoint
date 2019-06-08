@@ -15,7 +15,7 @@ const getNewId = (array) => {
     }
     
 }
-const newDate = () => new Date().toString()
+const newDate = () => new Date().toLocaleString()
 
 const mustBeInArray = (array, id) =>{
     return new Promise((resolve, reject) => {

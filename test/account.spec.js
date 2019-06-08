@@ -17,7 +17,7 @@ chai.use(chaiHttp);
         chai.request(app)
             .get('/api/v1/my-account/*')
             .end((err, res) => {
-                expect(res.status).to.equal(403);
+                expect(res.status).to.equal(401);
               done();
             });
       });

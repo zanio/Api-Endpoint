@@ -26,10 +26,8 @@ function getcar(id) {
 
 function insertcar(newcar) {
     return new Promise((resolve, reject) => {
-        const date = { 
-            createdAt: helper.newDate(),
-        } 
-        newcar = { ...newcar, ...date }
+        
+        newcar = { ...newcar }
         car.push(newcar)
         resolve(newcar)
     })

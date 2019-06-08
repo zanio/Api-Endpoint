@@ -30,6 +30,7 @@ chai.use(chaiHttp);
             .end((err, res) => {
               expect(res.body.status).to.equal(200);
               expect(res.body).to.be.a('object');
+              expect(res.body.data).to.have.property('id');
               done();
             });
       });

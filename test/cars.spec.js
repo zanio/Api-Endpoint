@@ -17,7 +17,8 @@ chai.use(chaiHttp);
         const body = {
           email: 'davephenom@gmail.com',
           manufacturer:'volvo',
-          model:'345'
+          model:'345',
+          
         };
   
         chai.request(app)

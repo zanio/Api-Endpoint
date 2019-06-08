@@ -197,9 +197,15 @@ const getId = (req, res, next)=>{
     let {user} = require('../data/users.js');
     const id = {id:result.payload};
     const date = { createdAt: newDate()} 
-    //user = user.find(r=>r.id === result.user.id);
-    const {email, model,manufacturer} = req.body
-    const data = {...id, email, model,manufacturer,...date}
+    user = user.find(r=>r.id === id.id);
+    //console.log(user)
+    const { model,manufacturer} = req.body;
+    const existingUser = {
+        first_name:user['first_name'],
+        last_name:user['last_name'],
+        address:user['address'],
+    }
+    const data = {...id, email:result['user']['data']['email'], model,manufacturer,...date,...existingUser}
     const carPost = {status:200,data}
     if(id){
         req.carPost= carPost;

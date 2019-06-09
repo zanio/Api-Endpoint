@@ -33,7 +33,7 @@ const checkFieldsUser = async (req, res, next) => {
     const stringRegex = require('../utils/string');
     const helper = require('../helpers/helper');
     const jwt = require('jsonwebtoken');
-    const key = require('../config/config')
+    const key = require('../config/keys')
     let newPassword;
 
     
@@ -68,7 +68,7 @@ const checkFieldsUser = async (req, res, next) => {
 
 const jwtsign = (req, res,next)=>{
     const jwt = require('jsonwebtoken');
-    const key = require('../config/config')
+    const key = require('../config/keys')
     const {user} = req
    
     const decoded = jwt.verify(user.data.token, key.secretKey);
@@ -112,7 +112,7 @@ const authorization = (req, res, next)=>{
 
 const jwtVerify = (req, res, next)=>{
     const jwt = require('jsonwebtoken');
-    const key = require('../config/config')
+    const key = require('../config/keys')
     const {token} = req
   jwt.verify(token, key.secretKey2, (err, result)=>{
       if(err){

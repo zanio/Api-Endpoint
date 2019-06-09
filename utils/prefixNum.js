@@ -1,4 +1,4 @@
-const key = require('../config/config')
+const key = require('../config/keys')
 
 const generateRandom = len=>{
   const keys = key.char

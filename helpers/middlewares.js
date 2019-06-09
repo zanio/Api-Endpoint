@@ -1,4 +1,6 @@
-import { newDate } from './helper'
+import { newDate,getSubId } from './helper';
+import { checkLetter, Arr } from '../utils/string'
+import checkFloat from '../utils/checkfloat'
 const mustBeInteger = (req, res, next) => {
 
     const id = req.params.id
@@ -192,27 +194,65 @@ const isSignUp = (req, res, next) => {
     
 }
 
+const checkCarEmpty = (req, res, next) =>{
+    const { model,manufacturer,state,price,body_type,color} = req.body;
+    if(!model && !manufacturer && !state && !price && !body_type && !color){
+        res.status(403).json({status:403,err:'empty field'})
+    } else{
+        const cars = {model,manufacturer,state,body_type,color}
+        const letterChar = {model,manufacturer,state,body_type,color}
+        const float = {price}
+        req.carObj = cars;
+        req.letterChar = letterChar;
+        req.float = float;
+        next();
+    }
+}
+
+const checkCarField = (req, res, next) =>{
+    const {carObj,letterChar,float}  = req
+   const boolArray = Arr(letterChar)
+   const letterBolean = checkLetter(boolArray)
+   const floatBoolean = checkFloat(float.price)
+   //console.log(float.price)
+    if(!letterBolean){
+        res.status(403).json({status:403,err:'field label except price (number) can only be Alphabet characters'})
+    } else if (!floatBoolean){
+        res.status(403).json({status:403,err:'price Must be Floating Number, i.e 1700.00'})
+    }
+    else{
+        req.price = parseFloat(float.price)
+        req.carObj = carObj;
+        next();
+    }
+    
+}
+
 const getId = (req, res, next)=>{
     const {result} = req;
-    let {user} = require('../data/users.js');
-    const id = {id:result.payload};
+    let {user,car} = require('../data/users.js');
+    const owner = {owner:result.payload};
     const date = { createdAt: newDate()} 
-    user = user.find(r=>r.id === id.id);
-    //console.log(user)
-    const { model,manufacturer} = req.body;
-    const existingUser = {
+    user = user.find(r=>r.id === owner.owner);
+    const { carObj,price } = req;
+    const existingUser = user? {
         first_name:user['first_name'],
         last_name:user['last_name'],
         address:user['address'],
-    }
-    const data = {...id, email:result['user']['data']['email'], model,manufacturer,...date,...existingUser}
-    const carPost = {status:200,data}
-    if(id){
-        req.carPost= carPost;
+    }:null
+    const data = {id:getSubId(car), ...owner,
+         email:result['user']['data']['email'], 
+         ...carObj,
+         price,
+         ...date,
+         ...existingUser
+        }
+    if(owner){
+        req.carData= data;
         next();
     } else{
-        res.status(401).json({
-            status:401,
+        res.status(403).json({
+            status:403,
             error:'unauthorized posting'
         })
     }
@@ -229,5 +269,7 @@ export {
     uniqueValue,
     checkFieldsUser,
     jwtVerify,
-    jwtsign
+    jwtsign,
+    checkCarEmpty,
+    checkCarField
 }

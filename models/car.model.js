@@ -1,7 +1,7 @@
 const dbPath = require('./dbPath')
 
 let {car} = require(dbPath.carFileName)
-const helper = require('../helpers/helper')
+import {getSubId} from '../helpers/helper'
 
 
 function getcars() {
@@ -26,8 +26,8 @@ function getcar(id) {
 
 function insertcar(newcar) {
     return new Promise((resolve, reject) => {
-        
-        newcar = { ...newcar }
+        const id = {id:getSubId(car)}
+        newcar = {...id, ...newcar }
         car.push(newcar)
         resolve(newcar)
     })

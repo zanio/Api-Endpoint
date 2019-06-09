@@ -15,9 +15,12 @@ chai.use(chaiHttp);
   describe(' POST AD ROUTES', () => {
       it('it should create new car adverts ', (done) => {
         const body = {
-          email: 'davephenom@gmail.com',
           manufacturer:'volvo',
-          model:'345',
+          model:'yoyarbv',
+          price:'787',
+          state:'lagos',
+          body_type:'vgfg',
+          color:'red'
           
         };
   
@@ -34,9 +37,12 @@ chai.use(chaiHttp);
 
       it('it shold return 401 unauthorized ', (done) => {
         const body = {
-          email: 'davephenom@gmail.com',
           manufacturer:'volvo',
-          model:'345'
+          model:'yoyarbv',
+          price:'787',
+          state:'lagos',
+          body_type:'vgfg',
+          color:'red'
         };
   
         chai.request(app)

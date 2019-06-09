@@ -1,6 +1,5 @@
 node_modules
 test.js
-config/config.js
 .nyc_output
 coverage
 frontend

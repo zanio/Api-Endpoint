@@ -3,9 +3,6 @@ import {expect} from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../app';
 
-
-
-//https://dev.to/asciidev/testing-a-nodeexpress-application-with-mocha--chai-4lho
 chai.use(chaiHttp);
 //Our parent block
 
@@ -23,4 +20,6 @@ chai.use(chaiHttp);
       });
  
   });
+
+ 
 

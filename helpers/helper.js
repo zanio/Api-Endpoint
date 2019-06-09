@@ -15,6 +15,20 @@ const getNewId = (array) => {
     }
     
 }
+
+const getSubId = (array) => {
+   
+    if (array.length > 0) {
+        let n;
+         let idValue = array[array.length - 1].id 
+         n = idValue+1
+        return n
+        
+    } else {
+       return 43501;
+    }
+    
+}
 const newDate = () => new Date().toLocaleString()
 
 const mustBeInArray = (array, id) =>{
@@ -57,6 +71,7 @@ export {
     newDate,
     mustBeInArray,
     harshPassword,
-    writeJSONFile
+    writeJSONFile,
+    getSubId
     
 }

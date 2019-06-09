@@ -8,11 +8,15 @@ let {car} = require('../data/users')
 
 
 /* create car advert  */
-router.post('/car', m.authorization, m.jwtVerify,m.getId, async(req, res)=>{
-  const {carPost} = req
-  cars.insertcar(carPost)
-  res.status(200).json(carPost)
-  console.log(car)
+router.post('/car', m.authorization, 
+  m.jwtVerify,m.checkCarEmpty,m.checkCarField,m.getId, async(req, res)=>{
+  const {carData} = req
+  cars.insertcar(carData)
+  .then(response=>{
+    console.log(response)
+    res.status(200).json({status:200,data:response})
+  })
+  
 })
 
 
